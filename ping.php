@@ -1,20 +1,26 @@
 <?php
 require_once 'config.local.php';
 
-$encoding = "latin1";
+$name = 3;
+$current_players = 5;
+$max_players = 6;
+$description = 15;
 $fp = fsockopen("udp://{$hostname}", $port, $errno, $errstr, 2);
 if (!$fp) {
   echo "Offline";
 } else {
-  fwrite($fp, "BNXI");
+  $send = "\xFE\xFD\x00\xE9\x49\x04\x05\x14\x01\x0B\x01\x05\x08\x0A\x33\x34\x35\x13\x04\x36\x37\x38\x39\x14\x3A\x3B\x3C\x3D\x00\x00";
+
+  fwrite($fp, $send);
   stream_set_timeout($fp, 2);
-  $fresponse = fread($fp, 48);
+  $fresponse = fread($fp, 5000);
   fclose($fp);
   if ($fresponse) {
+    $res = explode("\x00", $fresponse);
     echo("Online ("
-        . ord(mb_substr($fresponse, 10, 1, $encoding))
+        . $res[$current_players]
         . " / "
-        . ord(mb_substr($fresponse, 11, 1, $encoding))
+        . $res[$max_players]
         . " players)");
   } else {
     echo("Offline");
