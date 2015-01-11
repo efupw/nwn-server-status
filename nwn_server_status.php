@@ -45,9 +45,9 @@ function nwn_server_status($hostname, $port) {
         );
     }
 
-    $gamespy_2 = "\xFE\xFD\x00\xE9\x49\x04\x05\x14\x01\x0B\x01\x05\x08\x0A\x33\x34\x35\x13\x04\x36\x37\x38\x39\x14\x3A\x3B\x3C\x3D\x00\x00";
+    $gamespy_2_details = "\xFE\xFD\x00\x43\x4F\x52\x59\xFF\x00\x00";
 
-    $write = fwrite($fp, $gamespy_2);
+    $write = fwrite($fp, $gamespy_2_details);
     $timeout = stream_set_timeout($fp, 2);
     $response = fread($fp, 5000);
     $close = fclose($fp);
@@ -67,11 +67,11 @@ function nwn_server_status($hostname, $port) {
         );
     }
 
-    $name = 3;
-    $current_players = 5;
-    $max_players = 6;
-    $pvp = 9;
-    $description = 15;
+    $name = 2;
+    $current_players = 6;
+    $max_players = 8;
+    $pvp = 26;
+    $description = 34;
 
     return array(
         'connected'     => true,
