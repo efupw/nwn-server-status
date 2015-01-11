@@ -20,6 +20,7 @@ function nwn_server_status($hostname, $port) {
     $name = 3;
     $current_players = 5;
     $max_players = 6;
+    $pvp = 9;
     $description = 15;
     $res = explode("\x00", $fresponse);
     return "Online ("
