@@ -1,5 +1,4 @@
 <?php
-require_once 'config.local.php';
 
 /**
  * Queries the status of the NWN server at the given address.
@@ -82,12 +81,4 @@ function nwn_server_status($hostname, $port) {
         'pvp'           => $res[$pvp],
         'description'   => $res[$description],
     );
-}
-
-$status = nwn_server_status($hostname, $port);
-if ($status['connected']) {
-    echo "Online ({$status['current_players']} / ${status['max_players']}"
-        . ' players)';
-} else {
-    echo 'Offline';
 }
